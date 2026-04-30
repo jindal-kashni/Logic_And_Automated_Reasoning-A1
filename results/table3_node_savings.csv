@@ -1,0 +1,4 @@
+Formula,Category,Baseline nodes,Improved nodes,Nodes reduced,Node speedup,Improvement responsible,Formula text
+F2,Easy propositional,4,2,2,2.00x,Improvement 1: double-negation priority,P(a) -> not not P(a)
+F17,Easy propositional,4,2,2,2.00x,Improvement 1: double-negation priority,not not P(a) -> P(a)
+F25,Easy propositional,12,10,2,1.20x,Improvement 3: memoisation / repeated sequent avoidance,(P(a) or Q(a)) -> ((P(a) -> R(a)) -> ((Q(a) -> R(a)) -> R(a)))
