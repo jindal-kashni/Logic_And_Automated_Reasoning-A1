@@ -10,7 +10,7 @@ class Sequent:
     def __str__(self):
         left_str = ", ".join(str(f) for f in self.left)
         right_str = ", ".join(str(f) for f in self.right)
-        return f"{left_str} ⊢ {right_str}"
+        return f"{left_str} |- {right_str}"
 
 def initial_sequent(formula: Formula) -> Sequent:
     return Sequent(left=[], right=[formula])

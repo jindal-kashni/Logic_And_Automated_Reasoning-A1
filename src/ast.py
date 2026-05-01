@@ -1,18 +1,18 @@
 from dataclasses import dataclass
-from typing import List
+from typing import Tuple
 
 
-@dataclass
+@dataclass(frozen=True)
 class Term:
     pass
 
 
-@dataclass
+@dataclass(frozen=True)
 class Var(Term):
     name: str
 
 
-@dataclass
+@dataclass(frozen=True)
 class Const(Term):
     name: str
 
@@ -25,7 +25,7 @@ class Formula:
 @dataclass
 class Predicate(Formula):
     name: str
-    terms: List[Term]
+    terms: Tuple[Term, ...]
 
 
 @dataclass

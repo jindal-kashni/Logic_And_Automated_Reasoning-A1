@@ -3,6 +3,7 @@ import time
 from src.sequent import Sequent
 from src.rules import (
     is_identity,
+    reset_fresh_counter,
     apply_implies_right,
     apply_not_left,
     apply_not_right,
@@ -69,6 +70,8 @@ def apply_one_rule(sequent: Sequent):
 
 
 def prove(initial: Sequent, max_nodes=1000, max_depth=50, timeout_seconds=5):
+    reset_fresh_counter()
+
     start_time = time.time()
     nodes = 0
 

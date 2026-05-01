@@ -19,18 +19,19 @@ This project implements a baseline version of Algorithm 2 and an improved proof 
 
 ```text
 Logic_A1/
-├── datasets/
-│   └── benchmark_dataset.txt
-├── results/
-│   ├── baseline_results.csv
-│   ├── improved_results.csv
-│   ├── table1_overall.csv
-│   ├── table2_categories.csv
-│   ├── table3_node_savings.csv
-│   └── table4_new_solved.csv
-├── src/
-│   └── source code for parser, rules, baseline, improved algorithm and main runner
-├── tests/
-│   └── basic unit tests
-├── README.md
-└── requirements.txt
+    datasets/
+        benchmark_dataset.txt
+    results/
+        baseline_results.csv
+        improved_results.csv
+        table1_overall.csv
+        table2_categories.csv
+        table3_node_savings.csv
+        table4_new_solved.csv
+    src/
+        source code for parser, rules, baseline, improved algorithm and main runner
+    tests/
+        basic unit tests
+    README.md
+    requirements.txt
+```

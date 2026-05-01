@@ -1,6 +1,6 @@
 Category,Count,Baseline solved,Improved solved,Baseline %,Improved %
 Easy propositional,24,21,21,87.5%,87.5%
-Easy FOL,4,2,4,50.0%,100.0%
-Medium,5,0,4,0.0%,80.0%
-Hard,35,0,27,0.0%,77.1%
-Complex,53,0,38,0.0%,71.7%
+Easy FOL,4,4,4,100.0%,100.0%
+Medium,5,3,4,60.0%,80.0%
+Hard,35,17,27,48.6%,77.1%
+Complex,53,2,38,3.8%,71.7%

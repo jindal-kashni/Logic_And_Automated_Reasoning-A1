@@ -113,7 +113,7 @@ class Parser:
 
         self.consume("RPAREN")
 
-        return Predicate(name, terms)
+        return Predicate(name, tuple(terms))
 
     def parse_term(self):
         name = self.consume("IDENT")

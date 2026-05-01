@@ -1,12 +1,16 @@
 import time
 import heapq
 
-from src.ast import *
+from src.ast import (
+    Var, Const, Predicate,
+    Not, And, Or, Implies, Forall, Exists,
+)
 from src.sequent import Sequent
 from src.substitution import substitute_formula
 import src.rules as _rules
 from src.rules import (
     is_identity,
+    existing_terms,
     apply_implies_right,
     apply_not_left,
     apply_not_right,
@@ -19,7 +23,6 @@ from src.rules import (
     apply_implies_left,
 )
 
-# Result class
 
 class ProofResult:
     def __init__(self, status, nodes, time_ms):
@@ -29,6 +32,7 @@ class ProofResult:
 
     def __str__(self):
         return f"{self.status} | nodes={self.nodes} | time={self.time_ms:.2f}ms"
+
 
 # Simplification
 
@@ -72,86 +76,13 @@ def simplify_sequent(sequent):
         [simplify_formula(f) for f in sequent.right],
     )
 
-# Closure Check
 
-def is_closed(sequent):
-    if is_identity(sequent):
-        return True
-
-    for left_formula in sequent.left:
-        for right_formula in sequent.right:
-            if left_formula == right_formula:
-                return True
-
-    return False
-
-# Term Extraction
-
-def collect_terms_from_formula(formula):
-    terms = []
-
-    if isinstance(formula, Predicate):
-        for term in formula.terms:
-            if isinstance(term, Const):
-                terms.append(term)
-
-    elif isinstance(formula, Not):
-        terms.extend(collect_terms_from_formula(formula.formula))
-
-    elif isinstance(formula, (And, Or, Implies)):
-        terms.extend(collect_terms_from_formula(formula.left))
-        terms.extend(collect_terms_from_formula(formula.right))
-
-    elif isinstance(formula, (Forall, Exists)):
-        terms.extend(collect_terms_from_formula(formula.body))
-
-    return terms
-
-
-def existing_terms(sequent):
-    terms = []
-
-    for formula in sequent.left + sequent.right:
-        terms.extend(collect_terms_from_formula(formula))
-
-    unique = []
-    seen = set()
-
-    for term in terms:
-        key = str(term)
-        if key not in seen:
-            seen.add(key)
-            unique.append(term)
-
-    return unique
-
-# Fresh constant
-
-MAX_FRESH = 50
-fresh_counter = 0
-
-def reset_fresh_counter():
-    global fresh_counter
-    fresh_counter = 0
-
-
-def get_fresh_constant():
-    global fresh_counter
-
-    if fresh_counter >= MAX_FRESH:
-        return None
-
-    fresh_counter += 1
-    return Const(f"k{fresh_counter}")
-
-# Quantifier Rules
+# Quantifier helpers
 
 def innermost_quantifier_body(formula):
     current = formula
-
     while isinstance(current, Forall):
         current = current.body
-
     return current
 
 
@@ -182,154 +113,107 @@ def apply_ready_implies_left(sequent):
         if not formula_is_available(formula.left, sequent.left):
             continue
 
-        remaining_left = (
-            sequent.left[:index]
-            + sequent.left[index + 1:]
-        )
+        remaining_left = sequent.left[:index] + sequent.left[index + 1:]
 
-        branch_1 = Sequent(
-            remaining_left,
-            sequent.right + [formula.left],
-        )
-
-        branch_2 = Sequent(
-            remaining_left + [formula.right],
-            sequent.right,
-        )
+        branch_1 = Sequent(remaining_left, list(sequent.right) + [formula.left])
+        branch_2 = Sequent(list(remaining_left) + [formula.right], list(sequent.right))
 
         return [[branch_1, branch_2]]
 
     return []
 
 
-def improved_forall_left(sequent, memory):
+def _improved_candidates(sequent):
     terms = existing_terms(sequent)
+    if terms:
+        return terms
+    fresh = _rules._supply.fresh_const(sequent)
+    return [fresh]
 
-    if not terms:
-        fresh = get_fresh_constant()
-        if fresh is None:
-            return []
-        terms = [fresh]
 
+def improved_forall_left(sequent, memory):
     forall_formulas = [
-        formula for formula in sequent.left
-        if isinstance(formula, Forall)
+        formula for formula in sequent.left if isinstance(formula, Forall)
     ]
 
     def forall_priority(formula):
         body = innermost_quantifier_body(formula)
-
         if isinstance(body, Or):
             return 0
-
         if isinstance(body, Implies):
             return 1
-
         if isinstance(body, Exists):
             return 4
-
         return 2
 
     forall_formulas.sort(key=forall_priority)
 
     for formula in forall_formulas:
-        for term in terms:
+        for term in _improved_candidates(sequent):
             key = (str(formula), str(term))
-
             if key in memory:
                 continue
 
-            memory.add(key)
-
-            new_formula = substitute_formula(
-                formula.body,
-                formula.var,
-                term,
-            )
-
+            new_formula = substitute_formula(formula.body, formula.var, term)
             if new_formula in sequent.left:
+                # Already present in this branch; do not poison memory so
+                # later sequents (with different left sets) can still try it.
                 continue
 
-            new_left = sequent.left.copy()
-            new_left.append(new_formula)
-
-            return [Sequent(new_left, sequent.right)]
+            memory.add(key)
+            new_left = list(sequent.left) + [new_formula]
+            return [Sequent(new_left, list(sequent.right))]
 
     return []
 
 
 def improved_exists_right(sequent, memory):
-    terms = existing_terms(sequent)
-
-    if not terms:
-        fresh = get_fresh_constant()
-        if fresh is None:
-            return []
-        terms = [fresh]
-
     for formula in sequent.right:
-        if isinstance(formula, Exists):
-            for term in terms:
-                key = (str(formula), str(term))
+        if not isinstance(formula, Exists):
+            continue
+        for term in _improved_candidates(sequent):
+            key = (str(formula), str(term))
+            if key in memory:
+                continue
 
-                if key in memory:
-                    continue
+            new_formula = substitute_formula(formula.body, formula.var, term)
+            if new_formula in sequent.right:
+                continue
 
-                memory.add(key)
-
-                new_formula = substitute_formula(
-                    formula.body,
-                    formula.var,
-                    term,
-                )
-
-                new_right = sequent.right.copy()
-                new_right.append(new_formula)
-
-                return [Sequent(sequent.left, new_right)]
+            memory.add(key)
+            new_right = list(sequent.right) + [new_formula]
+            return [Sequent(list(sequent.left), new_right)]
 
     return []
 
-# Complexity
+
+# Complexity / cache key
 
 def formula_complexity(formula):
     if isinstance(formula, Predicate):
         return 1
-
     if isinstance(formula, Not):
         return 1 + formula_complexity(formula.formula)
-
     if isinstance(formula, (And, Or, Implies)):
-        return (
-            1
-            + formula_complexity(formula.left)
-            + formula_complexity(formula.right)
-        )
-
+        return 1 + formula_complexity(formula.left) + formula_complexity(formula.right)
     if isinstance(formula, (Forall, Exists)):
         return 1 + formula_complexity(formula.body)
-
     return 1
 
 
 def sequent_complexity(sequent):
-    return sum(
-        formula_complexity(formula)
-        for formula in sequent.left + sequent.right
-    )
+    return sum(formula_complexity(f) for f in list(sequent.left) + list(sequent.right))
 
-# Caching (sequent key)
 
 def sequent_key(sequent):
-    left = tuple(sorted(str(formula) for formula in sequent.left))
-    right = tuple(sorted(str(formula) for formula in sequent.right))
+    left = tuple(sorted(str(f) for f in sequent.left))
+    right = tuple(sorted(str(f) for f in sequent.right))
     return left, right
+
 
 # Rule application
 
 def apply_one_improved_rule(sequent, memory):
-    sequent = simplify_sequent(sequent)
-
     non_branching = [
         apply_implies_right,
         apply_not_left,
@@ -342,43 +226,36 @@ def apply_one_improved_rule(sequent, memory):
 
     for rule in non_branching:
         result = rule(sequent)
-
         if result:
             return result[0]
 
     result = apply_and_right(sequent)
-
     if result:
         branches = result[0]
         branches.sort(key=sequent_complexity)
         return branches
 
     result = apply_ready_implies_left(sequent)
-
     if result:
         branches = result[0]
         branches.sort(key=sequent_complexity)
         return branches
 
     result = improved_exists_right(sequent, memory)
-
     if result:
         return result[0]
 
     result = improved_forall_left(sequent, memory)
-
     if result:
         return result[0]
 
     result = apply_or_left(sequent)
-
     if result:
         branches = result[0]
         branches.sort(key=sequent_complexity)
         return branches
 
     result = apply_implies_left(sequent)
-
     if result:
         branches = result[0]
         branches.sort(key=sequent_complexity)
@@ -386,10 +263,10 @@ def apply_one_improved_rule(sequent, memory):
 
     return None
 
-# Prove Search
+
+# Search
 
 def prove(initial, max_nodes=2000, max_depth=80, timeout_seconds=5):
-    reset_fresh_counter()
     _rules.reset_fresh_counter()
 
     start = time.time()
@@ -402,58 +279,35 @@ def prove(initial, max_nodes=2000, max_depth=80, timeout_seconds=5):
 
     heapq.heappush(
         queue,
-        (
-            sequent_complexity(initial),
-            counter,
-            initial,
-            0,
-            set(),
-        ),
+        (sequent_complexity(initial), counter, initial, 0, set()),
     )
 
     while queue:
         if time.time() - start > timeout_seconds:
-            return ProofResult(
-                "TIMEOUT",
-                nodes,
-                (time.time() - start) * 1000,
-            )
+            return ProofResult("TIMEOUT", nodes, (time.time() - start) * 1000)
 
         _, _, sequent, depth, memory = heapq.heappop(queue)
         nodes += 1
 
         if nodes > max_nodes or depth > max_depth:
-            return ProofResult(
-                "UNKNOWN",
-                nodes,
-                (time.time() - start) * 1000,
-            )
-
-        sequent = simplify_sequent(sequent)
+            return ProofResult("UNKNOWN", nodes, (time.time() - start) * 1000)
 
         key = sequent_key(sequent)
-
         if key in visited:
             continue
-
         visited.add(key)
 
-        if is_closed(sequent):
+        if is_identity(sequent):
             continue
 
         result = apply_one_improved_rule(sequent, memory)
 
         if result is None:
-            return ProofResult(
-                "UNKNOWN",
-                nodes,
-                (time.time() - start) * 1000,
-            )
+            return ProofResult("UNKNOWN", nodes, (time.time() - start) * 1000)
 
         if isinstance(result, list):
             for child in result:
                 counter += 1
-
                 heapq.heappush(
                     queue,
                     (
@@ -461,12 +315,11 @@ def prove(initial, max_nodes=2000, max_depth=80, timeout_seconds=5):
                         counter,
                         child,
                         depth + 1,
-                        memory.copy(),
+                        set(memory),
                     ),
                 )
         else:
             counter += 1
-
             heapq.heappush(
                 queue,
                 (
@@ -474,12 +327,8 @@ def prove(initial, max_nodes=2000, max_depth=80, timeout_seconds=5):
                     counter,
                     result,
                     depth + 1,
-                    memory.copy(),
+                    memory,
                 ),
             )
 
-    return ProofResult(
-        "VALID",
-        nodes,
-        (time.time() - start) * 1000,
-    )
+    return ProofResult("VALID", nodes, (time.time() - start) * 1000)
