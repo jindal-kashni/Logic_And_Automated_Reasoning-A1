@@ -1,0 +1,350 @@
+# ============================================================
+# 3806ICT Assignment 1 — Online Benchmark Dataset (F46–F120)
+# ============================================================
+
+
+# Sources:
+#   [P86]  Pelletier, F.J. (1986). Seventy-Five Problems for Testing
+#          Automatic Theorem Provers. Journal of Automated Reasoning,
+#          2(2), 191–216.
+#   [TPTP] Sutcliffe, G. (2017). The TPTP Problem Library and
+#          Associated Infrastructure. Journal of Automated Reasoning,
+#          59(4), 483–502. https://www.tptp.org
+#   [H09]  Harrison, J. (2009). Handbook of Practical Logic and
+#          Automated Reasoning. Cambridge University Press.
+#
+# Format:  one formula per line (course syntax)
+#          trailing comment: tier | status | source-ref
+# ============================================================
+
+
+# ============================================================
+# MEDIUM — 15 problems (F46–F60)
+# Source: Pelletier [P86] monadic predicate section (Probs 18–23)
+#         + standard FOL identities from [H09]
+# All single closed formulas — no premises needed.
+# Pattern: 2 quantifier rule applications; tests ∀L/R, ∃L/R,
+#          negation shift, and first predicate combinations.
+# ============================================================
+
+# F46  — there exists a "default" element: if it has F, everything does
+exists y. forall x. (F(y) -> F(x))
+# MEDIUM  valid   [P86] Prob-18
+
+# F47  — universal conditional can be pushed inside implication
+(forall x. (P -> F(x))) -> (P -> forall x. F(x))
+# MEDIUM  valid   [P86] Prob-22
+
+# F48  — converse direction of F47
+(P -> forall x. F(x)) -> forall x. (P -> F(x))
+# MEDIUM  valid   [P86] Prob-23 dir-2
+
+# F49  — existence of a conditional implies conditional on existence
+(exists x. (F(x) -> G(x))) -> (forall x. F(x) -> exists x. G(x))
+# MEDIUM  valid   [H09] §2.8
+
+# F50  — universal conjunction distributes forward
+forall x. (F(x) /\ G(x)) -> (forall x. F(x) /\ forall x. G(x))
+# MEDIUM  valid   [H09] standard FOL identity
+
+# F51  — universal conjunction distributes backward
+(forall x. F(x)) /\ (forall x. G(x)) -> forall x. (F(x) /\ G(x))
+# MEDIUM  valid   [H09] standard FOL identity
+
+# F52  — existential disjunction distributes forward
+exists x. (F(x) \/ G(x)) -> (exists x. F(x)) \/ (exists x. G(x))
+# MEDIUM  valid   [H09] standard FOL identity
+
+# F53  — existential disjunction distributes backward
+(exists x. F(x)) \/ (exists x. G(x)) -> exists x. (F(x) \/ G(x))
+# MEDIUM  valid   [H09] standard FOL identity
+
+# F54  — negated existence of conjunction implies universal conditional
+~(exists x. (F(x) /\ G(x))) -> forall x. (F(x) -> ~G(x))
+# MEDIUM  valid   [H09] standard FOL identity
+
+# F55  — transitivity of universal implication
+(forall x. (F(x) -> G(x))) /\ (forall x. (G(x) -> H(x))) -> forall x. (F(x) -> H(x))
+# MEDIUM  valid   [H09] §2.8
+
+# F56  — trivial universal–existential: y = x is a witness
+forall x. exists y. (F(x) -> F(y))
+# MEDIUM  valid   [H09] standard FOL identity
+
+# F57  — case-split: F or G; each case leads to H or J respectively
+(forall x. (F(x) \/ G(x))) /\ (forall x. (~F(x) \/ H(x))) /\ (forall x. (~G(x) \/ J(x))) -> forall x. (H(x) \/ J(x))
+# MEDIUM  valid   [P86] Prob-27 simplified
+
+# F58  — disjunction of universals implies universal disjunction
+(forall x. (F(x) -> G(x))) \/ (forall x. (F(x) -> H(x))) -> forall x. (F(x) -> G(x) \/ H(x))
+# MEDIUM  valid   [H09] §2.8
+
+# F59  — INVALID: universal conditional disjunction does NOT split
+(forall x. (F(x) -> G(x) \/ H(x))) -> (forall x. (F(x) -> G(x))) \/ (forall x. (F(x) -> H(x)))
+# MEDIUM  invalid [P86] Prob-17 FOL variant — different x can go to G vs H
+
+# F60  — universal disjunction: all-F or all-G implies each-F-or-G
+(forall x. F(x)) \/ (forall x. G(x)) -> forall x. (F(x) \/ G(x))
+# MEDIUM  valid   [H09] standard FOL identity
+
+
+# ============================================================
+# HARD — 30 problems (F61–F90)
+# Sources: Pelletier [P86] Problems 24–33 (multi-predicate,
+#          requires chaining ≥3 quantifier/connective rules);
+#          TPTP SYN domain style [TPTP] (binary predicates,
+#          symmetry/transitivity reasoning).
+# Mix: 22 valid + 8 invalid.
+# ============================================================
+
+# F61  — Pelletier Prob-24: confinement chain with negated existence
+(~(exists x. (S(x) /\ Q(x)))) /\ (forall x. (P(x) -> Q(x) \/ R(x))) /\ (~(exists x. P(x)) -> exists x. Q(x)) /\ (forall x. (Q(x) \/ R(x) -> S(x))) -> exists x. (P(x) /\ R(x))
+# HARD  valid   [P86] Prob-24
+
+# F62  — two-step consequence via intermediate predicates G and H
+(forall x. (F(x) -> G(x) \/ H(x))) /\ (forall x. (G(x) -> I(x))) /\ (forall x. (H(x) -> J(x))) -> forall x. (F(x) -> I(x) \/ J(x))
+# HARD  valid   [P86] Prob-27 core chain
+
+# F63  — Pelletier Prob-27: contradiction derivation via hidden negation
+(exists x. (F(x) /\ ~G(x))) /\ (forall x. (F(x) -> H(x))) /\ (forall x. ((J(x) /\ I(x)) -> F(x))) /\ ((exists x. (H(x) /\ ~G(x))) -> forall x. (I(x) -> ~H(x))) -> forall x. (J(x) -> ~I(x))
+# HARD  valid   [P86] Prob-27
+
+# F64  — Pelletier Prob-28: chained quantifier scope shift
+(forall x. P(x) -> forall x. Q(x)) /\ ((forall x. (Q(x) -> R(x))) -> exists x. (Q(x) /\ S(x))) /\ (exists x. S(x) -> forall x. (F(x) -> G(x))) -> forall x. (P(x) /\ F(x) -> G(x))
+# HARD  valid   [P86] Prob-28
+
+# F65  — Pelletier Prob-29: combining two independent existentials
+(exists x. F(x)) /\ (exists x. G(x)) /\ (forall x. (F(x) -> H(x))) /\ (forall x. (G(x) -> J(x))) -> exists x. exists y. (F(x) /\ G(y) /\ H(x) /\ J(y))
+# HARD  valid   [P86] Prob-29
+
+# F66  — Pelletier Prob-30: universal premise eliminates open branch
+(forall x. (F(x) -> G(x) \/ ~H(x))) /\ (forall x. ((G(x) /\ ~I(x)) -> F(x) /\ H(x))) /\ (forall x. I(x)) -> forall x. (F(x) -> G(x))
+# HARD  valid   [P86] Prob-30
+
+# F67  — Pelletier Prob-31: negated conjunction frees existential
+~(exists x. (F(x) /\ (G(x) \/ H(x)))) /\ (exists x. (I(x) /\ F(x))) /\ (forall x. (~H(x) -> J(x))) -> exists x. (I(x) /\ J(x))
+# HARD  valid   [P86] Prob-31
+
+# F68  — Pelletier Prob-32: indirect predicate chain via K
+(forall x. ((F(x) /\ (G(x) \/ H(x))) -> I(x))) /\ (forall x. (I(x) /\ H(x) -> J(x))) /\ (forall x. (K(x) -> H(x))) -> forall x. (F(x) /\ K(x) -> J(x))
+# HARD  valid   [P86] Prob-32
+
+# F69  — cascade negation: triple chain + negated existence
+(forall x. (F(x) -> G(x))) /\ (forall x. (G(x) -> H(x))) /\ ~(exists x. H(x)) -> ~(exists x. F(x))
+# HARD  valid   [H09] §2.8
+
+# F70  — binary relation: symmetry + universal existence → joint witness
+(forall x. exists y. R(x,y)) /\ (forall x. forall y. (R(x,y) -> R(y,x))) -> forall x. exists y. (R(x,y) /\ R(y,x))
+# HARD  valid   [TPTP] SYN-style symmetry
+
+# F71  — transitivity + symmetry → reflexivity at endpoints
+(forall x. forall y. forall z. (R(x,y) /\ R(y,z) -> R(x,z))) /\ (forall x. forall y. (R(x,y) -> R(y,x))) -> forall x. forall y. (R(x,y) -> R(x,x))
+# HARD  valid   [TPTP] SYN-style
+
+# F72  — predicate lifting through intermediate relation
+(forall x. (F(x) -> exists y. (G(y) /\ H(x,y)))) /\ (forall x. (G(x) -> I(x))) -> forall x. (F(x) -> exists y. (I(y) /\ H(x,y)))
+# HARD  valid   [H09] §3.4
+
+# F73  — universal forward composition through binary predicate
+(forall x. forall y. (P(x,y) -> Q(x,y))) /\ (forall x. exists y. P(x,y)) -> forall x. exists y. Q(x,y)
+# HARD  valid   [TPTP] SYN-style
+
+# F74  — independent existentials combine via binary predicate
+(forall x. forall y. (F(x) /\ G(y) -> H(x,y))) /\ (exists x. F(x)) /\ (exists x. G(x)) -> exists x. exists y. H(x,y)
+# HARD  valid   [H09] §3.4
+
+# F75  — negated existence + universal choice → complete coverage
+(forall x. (F(x) \/ G(x))) /\ (forall x. (F(x) -> H(x))) /\ ~(exists x. H(x)) -> forall x. G(x)
+# HARD  valid   [H09] §2.8
+
+# F76  — asymmetry implies irreflexivity
+(forall x. forall y. (G(x,y) -> ~G(y,x))) -> forall x. ~G(x,x)
+# HARD  valid   [TPTP] SYN-style asymmetry
+
+# F77  — strict witness asymmetry implies no self-relation
+(forall x. exists y. (P(x,y) /\ ~P(y,x))) -> ~(exists x. P(x,x))
+# HARD  valid   [TPTP] SYN-style
+
+# F78  — monotone lifting: F→G, F→H implies F→G∧H
+(forall x. (F(x) -> G(x))) /\ (forall x. (F(x) -> H(x))) -> forall x. (F(x) -> G(x) /\ H(x))
+# HARD  valid   [H09] §2.8
+
+# F79  — disjunction elimination via two universal implications
+(forall x. (F(x) -> H(x))) /\ (forall x. (G(x) -> H(x))) -> forall x. ((F(x) \/ G(x)) -> H(x))
+# HARD  valid   [H09] §2.8
+
+# F80  — modus tollens lifted to existential level
+(forall x. (F(x) -> G(x))) /\ (exists x. ~G(x)) -> exists x. ~F(x)
+# HARD  valid   [H09] standard
+
+# F81  — INVALID: two independent ∃y witnesses need not coincide
+(forall x. exists y. F(x,y)) /\ (forall x. exists y. G(x,y)) -> forall x. exists y. (F(x,y) /\ G(x,y))
+# HARD  invalid [TPTP] SYN-style — F and G may pick different y
+
+# F82  — INVALID: single specific ∃x.∀y does NOT imply total coverage
+(exists x. forall y. R(x,y)) -> forall x. forall y. R(x,y)
+# HARD  invalid [TPTP] SYN-style
+
+# F83  — INVALID: separate existentials do not combine conjunctively
+(exists x. F(x)) /\ (exists x. G(x)) -> exists x. (F(x) /\ G(x))
+# HARD  invalid [H09] §2.8 — standard invalid example
+
+# F84  — INVALID: quantifier swap (hard direction of Lemma 2.3)
+forall x. exists y. R(x,y) -> exists y. forall x. R(x,y)
+# HARD  invalid [P86] Prob-35 variant — open branch on ∀L/∃R
+
+# F85  — INVALID: F-coverage by two alternatives need not split universally
+(forall x. (F(x) \/ G(x))) -> (forall x. F(x)) \/ (forall x. G(x))
+# HARD  invalid [H09] §2.8 — each x can independently be F or G
+
+# F86  — INVALID: reflexivity + transitivity do NOT imply symmetry
+(forall x. forall y. forall z. (R(x,y) /\ R(y,z) -> R(x,z))) /\ (forall x. R(x,x)) -> forall x. forall y. (R(x,y) -> R(y,x))
+# HARD  invalid [H09] §3.3 — strict order is a countermodel
+
+# F87  — conjunction split: F→G∧H splits into two universals
+(forall x. (F(x) -> G(x) /\ H(x))) -> (forall x. (F(x) -> G(x))) /\ (forall x. (F(x) -> H(x)))
+# HARD  valid   [H09] §2.8
+
+# F88  — strict asymmetry chain + existence → no self-accessible node
+(forall x. forall y. (H(x,y) -> ~H(y,x))) /\ (forall x. forall y. forall z. (H(x,y) /\ H(y,z) -> H(x,z))) /\ (forall x. exists y. H(x,y)) -> ~(exists x. H(x,x))
+# HARD  valid   [TPTP] SYN asymmetric order
+
+# F89  — INVALID: transitivity + confluence do NOT imply symmetry
+(forall x. forall y. forall z. (R(x,y) /\ R(z,y) -> R(x,z))) -> forall x. forall y. (R(x,y) -> R(y,x))
+# HARD  invalid [TPTP] SYN-style
+
+# F90  — contrapositive lift: G blocks F from propagating back
+(forall x. (G(x) -> F(x))) /\ ~(exists x. (F(x) /\ H(x))) -> ~(exists x. (G(x) /\ H(x)))
+# HARD  valid   [H09] §2.8
+
+
+# ============================================================
+# COMPLEX — 30 problems (F91–F120)
+# Sources: Pelletier [P86] Problems 35–47 (full predicate logic,
+#          binary relations, function-free multi-quantifier);
+#          TPTP SYN/LCL domain [TPTP] (deeper nesting ≥3
+#          quantifier alternations, relational properties);
+#          Harrison [H09] §3–4 (relational theory problems).
+# Mix: 20 valid + 10 invalid.
+# Expected: baseline TIMEOUT on most; improved solves 10–15.
+# ============================================================
+
+# F91  — symmetry + transitivity: endpoint relation equals starting relation
+(forall x. forall y. (F(x,y) -> F(y,x))) /\ (forall x. forall y. forall z. (F(x,y) /\ F(y,z) -> F(x,z))) -> forall x. forall y. (F(x,y) -> F(x,x))
+# COMPLEX  valid   [TPTP] SYN-sym-trans
+
+# F92  — four-step predicate chain: P→Q→R→S→T
+(forall x. (P(x) -> Q(x) /\ R(x))) /\ (forall x. (Q(x) /\ R(x) -> S(x))) /\ (forall x. (S(x) -> T(x))) -> forall x. (P(x) -> T(x))
+# COMPLEX  valid   [H09] §2.8 chain
+
+# F93  — asymmetric witness implies no self-loop
+(forall x. exists y. (G(x,y) /\ ~G(y,x))) -> ~(exists x. G(x,x))
+# COMPLEX  valid   [TPTP] SYN-style
+
+# F94  — Pelletier Prob-36: relational forward composition
+(forall x. exists y. F(x,y)) /\ (forall x. exists y. G(x,y)) /\ (forall x. forall y. (F(x,y) \/ G(x,y) -> forall z. (F(y,z) \/ G(y,z) -> H(x,z)))) -> forall x. exists y. H(x,y)
+# COMPLEX  valid   [P86] Prob-36
+
+# F95  — symmetry + transitivity give reflexivity on reachable nodes
+(forall x. forall y. forall z. (P(x,y) /\ P(y,z) -> P(x,z))) /\ (forall x. forall y. (P(x,y) -> P(y,x))) -> forall x. forall y. (P(x,y) -> P(y,y))
+# COMPLEX  valid   [TPTP] SYN-style equivalence
+
+# F96  — Russell's paradox: no set is its own Russell set
+~(exists y. forall x. ((F(x,y) -> ~F(x,x)) /\ (~F(x,x) -> F(x,y))))
+# COMPLEX  valid   [P86] Prob-39
+
+# F97  — confluence rule + a single edge → self-loop
+(forall x. forall y. forall z. (F(x,y) /\ F(z,y) -> F(x,z))) /\ (exists x. exists y. F(x,y)) -> exists x. F(x,x)
+# COMPLEX  valid   [TPTP] SYN confluence
+
+# F98  — strict irreflexivity from asymmetry (short version)
+(forall x. forall y. (F(x,y) -> ~F(y,x))) -> forall x. ~F(x,x)
+# COMPLEX  valid   [TPTP] SYN-asymmetry
+
+# F99  — total order + negation of one direction → opposite holds
+(forall x. forall y. forall z. (R(x,y) /\ R(y,z) -> R(x,z))) /\ (forall x. forall y. (R(x,y) \/ R(y,x))) -> forall x. forall y. forall z. (R(x,y) /\ ~R(x,z) -> R(z,y))
+# COMPLEX  valid   [H09] §3.3 total order
+
+# F100  — two-relation composition: A→B→C carries existential
+(forall x. forall y. (A(x,y) -> B(x,y))) /\ (forall x. forall y. (B(x,y) -> C(x,y))) /\ (exists x. exists y. A(x,y)) -> exists x. exists y. C(x,y)
+# COMPLEX  valid   [H09] §3.4
+
+# F101  — predicate lifting through relation with property transfer
+(forall x. (F(x) -> exists y. (G(x,y) /\ H(y)))) /\ (forall x. forall y. (G(x,y) -> I(x,y))) -> forall x. (F(x) -> exists y. (I(x,y) /\ H(y)))
+# COMPLEX  valid   [H09] §3.4
+
+# F102  — F-accessibility propagates: inhabited F has F-pair
+(exists x. F(x)) /\ (forall x. (F(x) -> exists y. (G(x,y) /\ F(y)))) -> exists x. exists y. (F(x) /\ G(x,y) /\ F(y))
+# COMPLEX  valid   [H09] §3.4
+
+# F103  — asymmetric + transitive + serial → no backward-total node
+(forall x. forall y. (R(x,y) -> ~R(y,x))) /\ (forall x. forall y. forall z. (R(x,y) /\ R(y,z) -> R(x,z))) /\ (forall x. exists y. R(x,y)) -> ~(exists x. forall y. R(y,x))
+# COMPLEX  valid   [TPTP] SYN strict order
+
+# F104  — relation lift: F and composition via H gives direct access
+(forall x. (F(x) -> exists y. (G(x,y) /\ H(y)))) /\ (forall x. forall y. (H(x) /\ G(y,x) -> J(y))) -> forall x. (F(x) -> J(x))
+# COMPLEX  valid   [P86] Prob-44 simplified
+
+# F105  — forward relation composition with second predicate
+(forall x. forall y. (P(x,y) -> Q(x,y))) /\ (forall x. forall y. (Q(x,y) -> R(y,x))) /\ (exists x. exists y. P(x,y)) -> exists x. exists y. R(x,y)
+# COMPLEX  valid   [TPTP] SYN composition
+
+# F106  — existential relation implies H on first + inhabited G
+(forall x. exists y. (F(x,y) /\ G(y))) /\ (forall x. forall y. (F(x,y) -> H(x))) -> forall x. (H(x) /\ exists y. G(y))
+# COMPLEX  valid   [H09] §3.4
+
+# F107  — symmetry + transitivity + reflexivity → equivalence completeness
+(forall x. forall y. (F(x,y) -> F(y,x))) /\ (forall x. exists y. F(x,y)) /\ (forall x. forall y. forall z. (F(x,y) /\ F(y,z) -> F(x,z))) -> forall x. F(x,x)
+# COMPLEX  valid   [H09] §3.3 equivalence relations
+
+# F108  — monotone entailment: A→B and A→C gives A→B∧C universally
+(forall x. (A(x) -> B(x) \/ C(x))) /\ (forall x. (B(x) -> D(x))) /\ (forall x. (C(x) -> E(x))) /\ (forall x. (D(x) \/ E(x) -> F(x))) -> forall x. (A(x) -> F(x))
+# COMPLEX  valid   [H09] §2.8 five-step chain
+
+# F109  — asymmetric witness is contrapositive of symmetry
+(exists x. exists y. (F(x,y) /\ ~F(y,x))) -> ~(forall x. forall y. (F(x,y) -> F(y,x)))
+# COMPLEX  valid   [TPTP] SYN-style
+
+# F110  — existential relation + property transfer composition
+(forall x. exists y. (P(x,y) /\ Q(y))) /\ (forall x. (Q(x) -> R(x))) -> forall x. exists y. (P(x,y) /\ R(y))
+# COMPLEX  valid   [H09] §3.4
+
+# F111  — asymmetric + transitive relation → irreflexive
+(forall x. forall y. (H(x,y) -> ~H(y,x))) /\ (forall x. forall y. forall z. (H(x,y) /\ H(y,z) -> H(x,z))) /\ (forall x. exists y. H(x,y)) -> ~(exists x. H(x,x))
+# COMPLEX  valid   [TPTP] SYN strict order (harder version of F88)
+
+# F112  — INVALID: reflexivity + transitivity do NOT give total order
+(forall x. forall y. forall z. (R(x,y) /\ R(y,z) -> R(x,z))) /\ (forall x. R(x,x)) -> forall x. forall y. (R(x,y) \/ R(y,x))
+# COMPLEX  invalid [H09] §3.3 — partial order is countermodel
+
+# F113  — INVALID: symmetry + transitivity alone do NOT imply reflexivity
+(forall x. forall y. forall z. (R(x,y) /\ R(y,z) -> R(x,z))) /\ (forall x. forall y. (R(x,y) -> R(y,x))) -> exists x. R(x,x)
+# COMPLEX  invalid [TPTP] SYN — empty relation is a countermodel
+
+# F114  — INVALID: confluence does NOT imply symmetry
+(forall x. forall y. forall z. (R(x,y) /\ R(z,y) -> R(x,z))) -> forall x. forall y. (R(x,y) -> R(y,x))
+# COMPLEX  invalid [TPTP] SYN-style
+
+# F115  — INVALID: reflexivity + transitivity do NOT imply universality
+(forall x. forall y. forall z. (F(x,y) /\ F(y,z) -> F(x,z))) /\ (forall x. F(x,x)) -> forall x. forall y. F(x,y)
+# COMPLEX  invalid [H09] §3.3 — identity relation is countermodel
+
+# F116  — INVALID: independent ∃y for F and G need not share witness
+(forall x. exists y. F(x,y)) /\ (forall x. exists y. ~F(x,y)) -> exists x. exists y. (F(x,y) /\ ~F(x,y))
+# COMPLEX  invalid [TPTP] SYN — trivially invalid (contradiction in conclusion)
+
+# F117  — INVALID: single ∃x.∀y implication does NOT give global ∀y
+(exists x. forall y. (F(x,y) -> G(x,y))) -> forall x. forall y. (F(x,y) -> G(x,y))
+# COMPLEX  invalid [TPTP] SYN — only one x is witnessed
+
+# F118  — confluence + inhabited → self-loop
+(forall x. forall y. forall z. (R(x,y) /\ R(z,y) -> R(x,z))) /\ (exists x. exists y. R(x,y)) -> exists x. R(x,x)
+# COMPLEX  valid   [TPTP] SYN confluence (from R(a,b) and R(a,b) → R(a,a))
+
+# F119  — universal serial propagation implies total coverage
+(forall x. exists y. R(x,y)) /\ (forall x. forall y. (R(x,y) -> forall z. R(y,z))) -> forall x. forall y. R(x,y)
+# COMPLEX  valid   [TPTP] SYN serial + transfer
+
+# F120  — INVALID: seriality + forward property does NOT give totality
+(forall x. exists y. R(x,y)) /\ (forall x. forall y. (R(x,y) -> R(y,y))) -> forall x. forall y. R(x,y)
+# COMPLEX  invalid [TPTP] SYN — R(x,y)→R(y,y) only constrains R(y,y), not all pairs
