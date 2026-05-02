@@ -1,4 +1,12 @@
 import os
+import sys
+
+_SRC_DIR = os.path.dirname(os.path.abspath(__file__))
+_PROJECT_ROOT = os.path.dirname(_SRC_DIR)
+sys.path[:] = [p for p in sys.path if os.path.abspath(p) != _SRC_DIR]
+if _PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, _PROJECT_ROOT)
+
 import csv
 from statistics import mean, median
 
@@ -107,32 +115,6 @@ def print_summary(total, baseline_valid, improved_valid, improved_gain, error_co
 def count_quantifiers(formula_text):
     text = formula_text.lower()
     return text.count("forall") + text.count("exists")
-
-
-def get_formula_category(formula_text):
-    text = formula_text.lower()
-
-    quantifier_count = count_quantifiers(formula_text)
-    connective_count = (
-        text.count("->")
-        + text.count("and")
-        + text.count("or")
-        + text.count("not")
-    )
-
-    if quantifier_count == 0:
-        return "Easy propositional"
-
-    if quantifier_count == 1:
-        return "Easy FOL"
-
-    if quantifier_count == 2 and connective_count <= 3:
-        return "Medium"
-
-    if quantifier_count <= 3:
-        return "Hard"
-
-    return "Complex"
 
 
 def get_reasoning_type(formula_text):
@@ -277,8 +259,7 @@ def create_table_1(results_dir, baseline_rows, improved_rows):
 
 def create_table_2(results_dir, baseline_rows, improved_rows):
     category_order = [
-        "Easy propositional",
-        "Easy FOL",
+        "Easy",
         "Medium",
         "Hard",
         "Complex",
@@ -444,8 +425,7 @@ def main():
 
     print_report_header(len(formulas))
 
-    for index, formula_text in enumerate(formulas, start=1):
-        category = get_formula_category(formula_text)
+    for index, (category, formula_text) in enumerate(formulas, start=1):
         formula_label = f"F{index}"
 
         try:

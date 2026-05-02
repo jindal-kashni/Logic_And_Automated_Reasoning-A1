@@ -1,122 +1,122 @@
 formula_id,formula_label,formula,category,status,nodes,time_ms
-1,F1,P(a) or not P(a),Easy propositional,VALID,3,0.02
-2,F2,P(a) -> not not P(a),Easy propositional,VALID,4,0.02
-3,F3,(P(a) and Q(a)) -> P(a),Easy propositional,VALID,3,0.01
-4,F4,P(a) -> (Q(a) -> P(a)),Easy propositional,VALID,3,0.01
-5,F5,P(a) -> P(a),Easy propositional,VALID,2,0.01
-6,F6,(exists x. P(x)) -> (forall x. P(x)),Medium,UNKNOWN,4,0.05
-7,F7,Q(a) -> (P(a) or Q(a)),Easy propositional,VALID,3,0.01
-8,F8,(exists x. (P(x) and Q(x))) -> ((exists x. P(x)) and (exists x. Q(x))),Hard,VALID,8,0.07
-9,F9,(P(a) and Q(a)) -> Q(a),Easy propositional,VALID,3,0.01
-10,F10,P(a) -> (Q(a) -> (P(a) and Q(a))),Easy propositional,VALID,5,0.01
-11,F11,P(a) -> ((P(a) -> Q(a)) -> Q(a)),Easy propositional,VALID,5,0.02
-12,F12,(not P(a) or Q(a)) -> (P(a) -> Q(a)),Easy propositional,VALID,6,0.02
-13,F13,P(a) -> (P(a) and Q(a)),Easy propositional,UNKNOWN,3,0.01
-14,F14,((P(a) -> Q(a)) and (Q(a) -> R(a))) -> (P(a) -> R(a)),Easy propositional,VALID,8,0.02
-15,F15,(P(a) and (Q(a) or R(a))) -> ((P(a) and Q(a)) or (P(a) and R(a))),Easy propositional,VALID,10,0.03
-16,F16,((P(a) or Q(a)) and not P(a)) -> Q(a),Easy propositional,VALID,6,0.02
-17,F17,not not P(a) -> P(a),Easy propositional,VALID,4,0.01
-18,F18,P(a) -> (exists x. P(x)),Easy FOL,VALID,3,0.02
-19,F19,(P(a) or Q(a)) -> P(a),Easy propositional,UNKNOWN,3,0.01
-20,F20,P(a) -> (P(a) or Q(a)),Easy propositional,VALID,3,0.01
-21,F21,(forall x. P(x)) -> P(a),Easy FOL,VALID,3,0.02
-22,F22,not (P(a) and not P(a)),Easy propositional,VALID,4,0.01
-23,F23,(forall x. P(x)) -> (exists x. P(x)),Medium,VALID,4,0.05
-24,F24,(exists x. ((P(x) and Q(x)) -> P(x))),Easy FOL,VALID,4,0.04
-25,F25,(P(a) or Q(a)) -> ((P(a) -> R(a)) -> ((Q(a) -> R(a)) -> R(a))),Easy propositional,VALID,12,0.04
-26,F26,(P(a) -> Q(a)) -> (Q(a) -> P(a)),Easy propositional,UNKNOWN,4,0.02
-27,F27,(P(a) -> Q(a)) -> (not Q(a) -> not P(a)),Easy propositional,VALID,7,0.02
-28,F28,P(a) -> (not P(a) -> Q(a)),Easy propositional,VALID,4,0.01
-29,F29,(P(a) or Q(a)) -> (Q(a) or P(a)),Easy propositional,VALID,5,0.01
-30,F30,(not Q(a) -> not P(a)) -> (P(a) -> Q(a)),Easy propositional,VALID,7,0.02
-31,F31,(forall x. ((P(x) and Q(x)) -> P(x))),Easy FOL,VALID,4,0.02
-32,F32,(forall x. (R1(x) -> R2(x))) -> ((forall x. R1(x)) -> (forall x. R2(x))),Hard,UNKNOWN,75,1.16
-33,F33,(forall x. (P(a) -> F(x))) -> (P(a) -> (forall x. F(x))),Hard,UNKNOWN,52,0.81
-34,F34,((forall x. (F(x) -> G(x))) or (forall x. (F(x) -> H(x)))) -> forall x. (F(x) -> (G(x) or H(x))),Hard,VALID,13,0.07
-35,F35,(not (forall x. R(x))) -> (exists x. not R(x)),Hard,VALID,6,0.03
-36,F36,"(forall x. R(x,x)) -> (forall x. (forall y. R(x,y)))",Hard,UNKNOWN,6,0.06
-37,F37,"(forall x. (forall y. R(x,y))) -> (forall x. (forall y. R(y,x)))",Complex,VALID,9,0.16
-38,F38,((forall x. F(x)) or (forall x. G(x))) -> forall x. (F(x) or G(x)),Hard,VALID,8,0.05
-39,F39,forall x. (exists y. (F(x) -> F(y))),Medium,VALID,4,0.03
-40,F40,(forall x. ((F(x) and G(x)))) -> ((forall x. F(x)) and (forall x. G(x))),Hard,VALID,10,0.06
-41,F41,(forall x. (F(x) -> (G(x) or H(x)))) -> ((forall x. (F(x) -> G(x))) or (forall x. (F(x) -> H(x)))),Hard,UNKNOWN,52,0.65
-42,F42,((forall x. (F(x) or G(x))) and (forall x. (not F(x) or H(x))) and (forall x. (not G(x) or J(x)))) -> forall x. (H(x) or J(x)),Complex,UNKNOWN,67,1.24
-43,F43,(forall x. (not R(x))) -> (not (exists x. R(x))),Hard,VALID,6,0.03
-44,F44,(P(a) -> (forall x. F(x))) -> (forall x. (P(a) -> F(x))),Hard,VALID,8,0.05
-45,F45,exists x. ((F(x) or G(x)) -> ((exists x. F(x)) or (exists x. G(x)))),Hard,UNKNOWN,52,5.88
-46,F46,(exists x. (not R(x))) -> (not (forall x. R(x))),Hard,VALID,6,0.03
-47,F47,"(forall y. (exists x. R(x,y))) -> (exists x. (forall y. R(x,y)))",Complex,UNKNOWN,52,1.65
+1,F1,P(a) or not P(a),Easy,VALID,3,0.03
+2,F2,P(a) -> not not P(a),Easy,VALID,4,0.02
+3,F3,(P(a) and Q(a)) -> P(a),Easy,VALID,3,0.01
+4,F4,P(a) -> (Q(a) -> P(a)),Easy,VALID,3,0.01
+5,F5,P(a) -> P(a),Easy,VALID,2,0.01
+6,F6,(exists x. P(x)) -> (forall x. P(x)),Easy,UNKNOWN,4,0.07
+7,F7,Q(a) -> (P(a) or Q(a)),Easy,VALID,3,0.01
+8,F8,(exists x. (P(x) and Q(x))) -> ((exists x. P(x)) and (exists x. Q(x))),Easy,VALID,8,0.12
+9,F9,(P(a) and Q(a)) -> Q(a),Easy,VALID,3,0.01
+10,F10,P(a) -> (Q(a) -> (P(a) and Q(a))),Easy,VALID,5,0.02
+11,F11,P(a) -> ((P(a) -> Q(a)) -> Q(a)),Easy,VALID,5,0.03
+12,F12,(not P(a) or Q(a)) -> (P(a) -> Q(a)),Easy,VALID,6,0.03
+13,F13,P(a) -> (P(a) and Q(a)),Easy,UNKNOWN,3,0.02
+14,F14,((P(a) -> Q(a)) and (Q(a) -> R(a))) -> (P(a) -> R(a)),Easy,VALID,8,0.03
+15,F15,(P(a) and (Q(a) or R(a))) -> ((P(a) and Q(a)) or (P(a) and R(a))),Easy,VALID,10,0.03
+16,F16,((P(a) or Q(a)) and not P(a)) -> Q(a),Easy,VALID,6,0.01
+17,F17,not not P(a) -> P(a),Easy,VALID,4,0.01
+18,F18,P(a) -> (exists x. P(x)),Easy,VALID,3,0.02
+19,F19,(P(a) or Q(a)) -> P(a),Easy,UNKNOWN,3,0.01
+20,F20,P(a) -> (P(a) or Q(a)),Easy,VALID,3,0.01
+21,F21,(forall x. P(x)) -> P(a),Easy,VALID,3,0.03
+22,F22,not (P(a) and not P(a)),Easy,VALID,4,0.01
+23,F23,(forall x. P(x)) -> (exists x. P(x)),Easy,VALID,4,0.1
+24,F24,(exists x. ((P(x) and Q(x)) -> P(x))),Easy,VALID,4,0.06
+25,F25,(P(a) or Q(a)) -> ((P(a) -> R(a)) -> ((Q(a) -> R(a)) -> R(a))),Easy,VALID,12,0.04
+26,F26,(P(a) -> Q(a)) -> (Q(a) -> P(a)),Easy,UNKNOWN,4,0.02
+27,F27,(P(a) -> Q(a)) -> (not Q(a) -> not P(a)),Easy,VALID,7,0.02
+28,F28,P(a) -> (not P(a) -> Q(a)),Easy,VALID,4,0.01
+29,F29,(P(a) or Q(a)) -> (Q(a) or P(a)),Easy,VALID,5,0.02
+30,F30,(not Q(a) -> not P(a)) -> (P(a) -> Q(a)),Easy,VALID,7,0.02
+31,F31,(forall x. ((P(x) and Q(x)) -> P(x))),Easy,VALID,4,0.03
+32,F32,(forall x. (R1(x) -> R2(x))) -> ((forall x. R1(x)) -> (forall x. R2(x))),Medium,UNKNOWN,75,1.19
+33,F33,(forall x. (P(a) -> F(x))) -> (P(a) -> (forall x. F(x))),Medium,UNKNOWN,52,0.82
+34,F34,((forall x. (F(x) -> G(x))) or (forall x. (F(x) -> H(x)))) -> forall x. (F(x) -> (G(x) or H(x))),Medium,VALID,13,0.08
+35,F35,(not (forall x. R(x))) -> (exists x. not R(x)),Medium,VALID,6,0.04
+36,F36,"(forall x. R(x,x)) -> (forall x. (forall y. R(x,y)))",Medium,UNKNOWN,6,0.06
+37,F37,"(forall x. (forall y. R(x,y))) -> (forall x. (forall y. R(y,x)))",Medium,VALID,9,0.18
+38,F38,((forall x. F(x)) or (forall x. G(x))) -> forall x. (F(x) or G(x)),Medium,VALID,8,0.06
+39,F39,forall x. (exists y. (F(x) -> F(y))),Medium,VALID,4,0.04
+40,F40,(forall x. ((F(x) and G(x)))) -> ((forall x. F(x)) and (forall x. G(x))),Medium,VALID,10,0.06
+41,F41,(forall x. (F(x) -> (G(x) or H(x)))) -> ((forall x. (F(x) -> G(x))) or (forall x. (F(x) -> H(x)))),Medium,UNKNOWN,52,0.89
+42,F42,((forall x. (F(x) or G(x))) and (forall x. (not F(x) or H(x))) and (forall x. (not G(x) or J(x)))) -> forall x. (H(x) or J(x)),Medium,UNKNOWN,67,1.34
+43,F43,(forall x. (not R(x))) -> (not (exists x. R(x))),Medium,VALID,6,0.04
+44,F44,(P(a) -> (forall x. F(x))) -> (forall x. (P(a) -> F(x))),Medium,VALID,8,0.06
+45,F45,exists x. ((F(x) or G(x)) -> ((exists x. F(x)) or (exists x. G(x)))),Medium,UNKNOWN,52,7.37
+46,F46,(exists x. (not R(x))) -> (not (forall x. R(x))),Medium,VALID,6,0.04
+47,F47,"(forall y. (exists x. R(x,y))) -> (exists x. (forall y. R(x,y)))",Medium,UNKNOWN,52,2.09
 48,F48,(exists x. R1(x)) -> (exists x. (R1(x) or R2(x))),Medium,VALID,5,0.04
-49,F49,"(exists x. (forall y. R(x,y))) -> (forall y. (exists x. R(x,y)))",Complex,VALID,8,0.1
-50,F50,((forall x. (F(x) -> G(x))) and (forall x. (G(x) -> H(x)))) -> forall x. (F(x) -> H(x)),Hard,UNKNOWN,52,1.12
-51,F51,((exists x. F(x)) or (exists x. G(x))) -> exists x. (F(x) or G(x)),Hard,VALID,10,0.07
-52,F52,(forall x. (P(x) or Q(x))) -> ((forall x. P(x)) or (forall x. Q(x))),Hard,UNKNOWN,52,1.37
-53,F53,(exists y. (forall x. (F(y) -> F(x)))),Medium,UNKNOWN,52,1.97
-54,F54,(exists x. (F(x) -> G(x))) -> ((forall x. F(x)) -> exists x. G(x)),Hard,VALID,9,0.07
-55,F55,(not (exists x. R(x))) -> (forall x. not R(x)),Hard,VALID,6,0.04
-56,F56,not (exists x. (F(x) and G(x))) -> forall x. (F(x) -> not G(x)),Hard,VALID,9,0.04
-57,F57,((exists x. P(x)) and (exists x. Q(x))) -> (exists x. (P(x) and Q(x))),Hard,UNKNOWN,52,0.79
-58,F58,(forall x. ((P(a) -> R(x)))) -> (P(a) -> (forall x. R(x))),Hard,UNKNOWN,52,0.91
-59,F59,((forall x. F(x)) and (forall x. G(x))) -> forall x. (F(x) and G(x)),Hard,VALID,9,0.08
-60,F60,((exists x. R1(x)) and (forall x. (R1(x) -> R2(x)))) -> (exists x. R2(x)),Hard,UNKNOWN,52,0.83
-61,F61,(forall x. (exists y. (R1(x) and R2(y)))) -> ((forall x. R1(x)) and (exists x. R2(x))),Complex,UNKNOWN,52,0.91
-62,F62,((forall x. (F(x) or G(x))) and (forall x. (F(x) -> H(x))) and not (exists x. H(x))) -> forall x. G(x),Complex,UNKNOWN,74,2.11
-63,F63,((forall x. ((F(x) and (G(x) or H(x))) -> I(x))) and (forall x. ((I(x) and H(x)) -> J(x))) and (forall x. (K(x) -> H(x)))) -> forall x. ((F(x) and K(x)) -> J(x)),Complex,UNKNOWN,52,1.96
-64,F64,"(forall x. (exists y. R(x,y))) -> (exists y. (forall x. R(x,y)))",Complex,UNKNOWN,52,1.12
-65,F65,((forall x. (F(x) -> H(x))) and (forall x. (G(x) -> H(x)))) -> forall x. ((F(x) or G(x)) -> H(x)),Hard,UNKNOWN,74,1.45
-66,F66,"((forall x. forall y. (H(x,y) -> not H(y,x))) and (forall x. forall y. forall z. ((H(x,y) and H(y,z)) -> H(x,z))) and (forall x. exists y. H(x,y))) -> not (exists x. H(x,x))",Complex,UNKNOWN,52,2.38
-67,F67,"(forall x. forall y. forall z. ((R(x,y) and R(z,y)) -> R(x,z))) -> forall x. forall y. (R(x,y) -> R(y,x))",Complex,UNKNOWN,52,7.2
-68,F68,"((forall x. forall y. forall z. ((R(x,y) and R(y,z)) -> R(x,z))) and (forall x. forall y. (R(x,y) -> R(y,x)))) -> forall x. forall y. (R(x,y) -> R(x,x))",Complex,UNKNOWN,70,11.93
-69,F69,"((forall x. exists y. F(x,y)) and (forall x. exists y. G(x,y))) -> forall x. exists y. (F(x,y) and G(x,y))",Complex,UNKNOWN,52,1.62
-70,F70,((forall x. (F(x) -> G(x))) and (exists x. not G(x))) -> exists x. not F(x),Hard,UNKNOWN,75,0.81
-71,F71,(not (exists x. (S(x) and Q(x)))) and (forall x. (P(x) -> (Q(x) or R(x)))) and ((not (exists x. P(x))) -> exists x. Q(x)) and (forall x. ((Q(x) or R(x)) -> S(x))) -> exists x. (P(x) and R(x)),Complex,UNKNOWN,52,1.46
-72,F72,((forall x. (F(x) -> (G(x) or not H(x)))) and (forall x. ((G(x) and not I(x)) -> (F(x) and H(x)))) and (forall x. I(x))) -> forall x. (F(x) -> G(x)),Complex,UNKNOWN,52,1.21
-73,F73,((forall x. (G(x) -> F(x))) and not (exists x. (F(x) and H(x)))) -> not (exists x. (G(x) and H(x))),Hard,UNKNOWN,52,1.07
-74,F74,((not (exists x. (F(x) and (G(x) or H(x))))) and (exists x. (I(x) and F(x))) and (forall x. (not H(x) -> J(x)))) -> exists x. (I(x) and J(x)),Complex,UNKNOWN,52,1.12
-75,F75,"(exists x. forall y. R(x,y)) -> forall x. forall y. R(x,y)",Complex,UNKNOWN,8,0.1
-76,F76,((forall x. (F(x) -> G(x))) and (forall x. (F(x) -> H(x)))) -> forall x. (F(x) -> (G(x) and H(x))),Hard,UNKNOWN,52,1.13
-77,F77,((forall x. (F(x) -> (G(x) or H(x)))) and (forall x. (G(x) -> I(x))) and (forall x. (H(x) -> J(x)))) -> forall x. (F(x) -> (I(x) or J(x))),Complex,UNKNOWN,74,2.04
-78,F78,((exists x. F(x)) and (exists x. G(x))) -> exists x. (F(x) and G(x)),Hard,UNKNOWN,52,0.8
-79,F79,"(forall x. forall y. (G(x,y) -> not G(y,x))) -> forall x. not G(x,x)",Hard,VALID,9,0.07
-80,F80,"((forall x. forall y. ((F(x) and G(y)) -> H(x,y))) and (exists x. F(x)) and (exists x. G(x))) -> exists x. exists y. H(x,y)",Complex,UNKNOWN,52,2.45
-81,F81,"((forall x. forall y. forall z. ((R(x,y) and R(y,z)) -> R(x,z))) and (forall x. R(x,x))) -> forall x. forall y. (R(x,y) -> R(y,x))",Complex,UNKNOWN,52,11.68
-82,F82,((exists x. (F(x) and not G(x))) and (forall x. (F(x) -> H(x))) and (forall x. ((J(x) and I(x)) -> F(x))) and ((exists x. (H(x) and not G(x))) -> forall x. (I(x) -> not H(x)))) -> forall x. (J(x) -> not I(x)),Complex,UNKNOWN,52,1.58
-83,F83,((forall x. (F(x) -> G(x))) and (forall x. (G(x) -> H(x))) and not (exists x. H(x))) -> not (exists x. F(x)),Complex,UNKNOWN,52,1.13
-84,F84,((forall x. P(x) -> forall x. Q(x)) and ((forall x. (Q(x) -> R(x))) -> exists x. (Q(x) and S(x))) and (exists x. S(x) -> forall x. (F(x) -> G(x)))) -> forall x. ((P(x) and F(x)) -> G(x)),Complex,UNKNOWN,49,0.49
-85,F85,"((forall x. exists y. R(x,y)) and (forall x. forall y. (R(x,y) -> R(y,x)))) -> forall x. exists y. (R(x,y) and R(y,x))",Complex,UNKNOWN,52,1.97
-86,F86,(forall x. (F(x) or G(x))) -> ((forall x. F(x)) or (forall x. G(x))),Hard,UNKNOWN,52,0.81
-87,F87,"((forall x. (F(x) -> exists y. (G(y) and H(x,y)))) and (forall x. (G(x) -> I(x)))) -> forall x. (F(x) -> exists y. (I(y) and H(x,y)))",Complex,UNKNOWN,52,1.11
-88,F88,"((forall x. forall y. (P(x,y) -> Q(x,y))) and (forall x. exists y. P(x,y))) -> forall x. exists y. Q(x,y)",Complex,UNKNOWN,52,16.85
-89,F89,"(forall x. exists y. (P(x,y) and not P(y,x))) -> not (exists x. P(x,x))",Hard,UNKNOWN,52,1.08
+49,F49,"(exists x. (forall y. R(x,y))) -> (forall y. (exists x. R(x,y)))",Medium,VALID,8,0.11
+50,F50,((forall x. (F(x) -> G(x))) and (forall x. (G(x) -> H(x)))) -> forall x. (F(x) -> H(x)),Medium,UNKNOWN,52,2.07
+51,F51,((exists x. F(x)) or (exists x. G(x))) -> exists x. (F(x) or G(x)),Medium,VALID,10,0.07
+52,F52,(forall x. (P(x) or Q(x))) -> ((forall x. P(x)) or (forall x. Q(x))),Medium,UNKNOWN,52,0.89
+53,F53,(exists y. (forall x. (F(y) -> F(x)))),Medium,UNKNOWN,52,1.96
+54,F54,(exists x. (F(x) -> G(x))) -> ((forall x. F(x)) -> exists x. G(x)),Medium,VALID,9,0.06
+55,F55,(not (exists x. R(x))) -> (forall x. not R(x)),Medium,VALID,6,0.03
+56,F56,not (exists x. (F(x) and G(x))) -> forall x. (F(x) -> not G(x)),Medium,VALID,9,0.05
+57,F57,((exists x. P(x)) and (exists x. Q(x))) -> (exists x. (P(x) and Q(x))),Medium,UNKNOWN,52,0.94
+58,F58,(forall x. ((P(a) -> R(x)))) -> (P(a) -> (forall x. R(x))),Medium,UNKNOWN,52,0.85
+59,F59,((forall x. F(x)) and (forall x. G(x))) -> forall x. (F(x) and G(x)),Medium,VALID,9,0.08
+60,F60,((exists x. R1(x)) and (forall x. (R1(x) -> R2(x)))) -> (exists x. R2(x)),Medium,UNKNOWN,52,0.77
+61,F61,(forall x. (exists y. (R1(x) and R2(y)))) -> ((forall x. R1(x)) and (exists x. R2(x))),Medium,UNKNOWN,52,0.93
+62,F62,((forall x. (F(x) or G(x))) and (forall x. (F(x) -> H(x))) and not (exists x. H(x))) -> forall x. G(x),Hard,UNKNOWN,74,1.38
+63,F63,((forall x. ((F(x) and (G(x) or H(x))) -> I(x))) and (forall x. ((I(x) and H(x)) -> J(x))) and (forall x. (K(x) -> H(x)))) -> forall x. ((F(x) and K(x)) -> J(x)),Hard,UNKNOWN,52,1.8
+64,F64,"(forall x. (exists y. R(x,y))) -> (exists y. (forall x. R(x,y)))",Hard,UNKNOWN,52,1.15
+65,F65,((forall x. (F(x) -> H(x))) and (forall x. (G(x) -> H(x)))) -> forall x. ((F(x) or G(x)) -> H(x)),Hard,UNKNOWN,74,1.38
+66,F66,"((forall x. forall y. (H(x,y) -> not H(y,x))) and (forall x. forall y. forall z. ((H(x,y) and H(y,z)) -> H(x,z))) and (forall x. exists y. H(x,y))) -> not (exists x. H(x,x))",Hard,UNKNOWN,52,2.53
+67,F67,"(forall x. forall y. forall z. ((R(x,y) and R(z,y)) -> R(x,z))) -> forall x. forall y. (R(x,y) -> R(y,x))",Hard,UNKNOWN,52,9.69
+68,F68,"((forall x. forall y. forall z. ((R(x,y) and R(y,z)) -> R(x,z))) and (forall x. forall y. (R(x,y) -> R(y,x)))) -> forall x. forall y. (R(x,y) -> R(x,x))",Hard,UNKNOWN,70,11.96
+69,F69,"((forall x. exists y. F(x,y)) and (forall x. exists y. G(x,y))) -> forall x. exists y. (F(x,y) and G(x,y))",Hard,UNKNOWN,52,1.8
+70,F70,((forall x. (F(x) -> G(x))) and (exists x. not G(x))) -> exists x. not F(x),Hard,UNKNOWN,75,1.09
+71,F71,(not (exists x. (S(x) and Q(x)))) and (forall x. (P(x) -> (Q(x) or R(x)))) and ((not (exists x. P(x))) -> exists x. Q(x)) and (forall x. ((Q(x) or R(x)) -> S(x))) -> exists x. (P(x) and R(x)),Hard,UNKNOWN,52,1.41
+72,F72,((forall x. (F(x) -> (G(x) or not H(x)))) and (forall x. ((G(x) and not I(x)) -> (F(x) and H(x)))) and (forall x. I(x))) -> forall x. (F(x) -> G(x)),Hard,UNKNOWN,52,1.22
+73,F73,((forall x. (G(x) -> F(x))) and not (exists x. (F(x) and H(x)))) -> not (exists x. (G(x) and H(x))),Hard,UNKNOWN,52,0.72
+74,F74,((not (exists x. (F(x) and (G(x) or H(x))))) and (exists x. (I(x) and F(x))) and (forall x. (not H(x) -> J(x)))) -> exists x. (I(x) and J(x)),Hard,UNKNOWN,52,0.92
+75,F75,"(exists x. forall y. R(x,y)) -> forall x. forall y. R(x,y)",Hard,UNKNOWN,8,0.15
+76,F76,((forall x. (F(x) -> G(x))) and (forall x. (F(x) -> H(x)))) -> forall x. (F(x) -> (G(x) and H(x))),Hard,UNKNOWN,52,1.07
+77,F77,((forall x. (F(x) -> (G(x) or H(x)))) and (forall x. (G(x) -> I(x))) and (forall x. (H(x) -> J(x)))) -> forall x. (F(x) -> (I(x) or J(x))),Hard,UNKNOWN,74,2.08
+78,F78,((exists x. F(x)) and (exists x. G(x))) -> exists x. (F(x) and G(x)),Hard,UNKNOWN,52,0.83
+79,F79,"(forall x. forall y. (G(x,y) -> not G(y,x))) -> forall x. not G(x,x)",Hard,VALID,9,0.09
+80,F80,"((forall x. forall y. ((F(x) and G(y)) -> H(x,y))) and (exists x. F(x)) and (exists x. G(x))) -> exists x. exists y. H(x,y)",Hard,UNKNOWN,52,2.38
+81,F81,"((forall x. forall y. forall z. ((R(x,y) and R(y,z)) -> R(x,z))) and (forall x. R(x,x))) -> forall x. forall y. (R(x,y) -> R(y,x))",Hard,UNKNOWN,52,8.1
+82,F82,((exists x. (F(x) and not G(x))) and (forall x. (F(x) -> H(x))) and (forall x. ((J(x) and I(x)) -> F(x))) and ((exists x. (H(x) and not G(x))) -> forall x. (I(x) -> not H(x)))) -> forall x. (J(x) -> not I(x)),Hard,UNKNOWN,52,2.24
+83,F83,((forall x. (F(x) -> G(x))) and (forall x. (G(x) -> H(x))) and not (exists x. H(x))) -> not (exists x. F(x)),Hard,UNKNOWN,52,1.14
+84,F84,((forall x. P(x) -> forall x. Q(x)) and ((forall x. (Q(x) -> R(x))) -> exists x. (Q(x) and S(x))) and (exists x. S(x) -> forall x. (F(x) -> G(x)))) -> forall x. ((P(x) and F(x)) -> G(x)),Hard,UNKNOWN,49,0.48
+85,F85,"((forall x. exists y. R(x,y)) and (forall x. forall y. (R(x,y) -> R(y,x)))) -> forall x. exists y. (R(x,y) and R(y,x))",Hard,UNKNOWN,52,1.78
+86,F86,(forall x. (F(x) or G(x))) -> ((forall x. F(x)) or (forall x. G(x))),Hard,UNKNOWN,52,0.79
+87,F87,"((forall x. (F(x) -> exists y. (G(y) and H(x,y)))) and (forall x. (G(x) -> I(x)))) -> forall x. (F(x) -> exists y. (I(y) and H(x,y)))",Hard,UNKNOWN,52,1.14
+88,F88,"((forall x. forall y. (P(x,y) -> Q(x,y))) and (forall x. exists y. P(x,y))) -> forall x. exists y. Q(x,y)",Hard,UNKNOWN,52,15.97
+89,F89,"(forall x. exists y. (P(x,y) and not P(y,x))) -> not (exists x. P(x,x))",Hard,UNKNOWN,52,1.12
 90,F90,(forall x. (F(x) -> (G(x) and H(x)))) -> ((forall x. (F(x) -> G(x))) and (forall x. (F(x) -> H(x)))),Hard,VALID,16,0.09
-91,F91,((exists x. F(x)) and (exists x. G(x)) and (forall x. (F(x) -> H(x))) and (forall x. (G(x) -> J(x)))) -> exists x. exists y. (F(x) and G(y) and H(x) and J(y)),Complex,UNKNOWN,52,1.48
-92,F92,"not (exists y. forall x. ((F(x,y) -> not F(x,x)) and (not F(x,x) -> F(x,y))))",Hard,VALID,14,0.07
-93,F93,"((forall x. forall y. forall z. ((R(x,y) and R(y,z)) -> R(x,z))) and (forall x. forall y. (R(x,y) or R(y,x)))) -> forall x. forall y. forall z. ((R(x,y) and not R(x,z)) -> R(z,y))",Complex,UNKNOWN,52,24.91
-94,F94,"(forall x. forall y. forall z. ((R(x,y) and R(z,y)) -> R(x,z))) -> forall x. forall y. (R(x,y) -> R(y,x))",Complex,UNKNOWN,52,7.42
-95,F95,"((forall x. forall y. forall z. ((F(x,y) and F(z,y)) -> F(x,z))) and (exists x. exists y. F(x,y))) -> exists x. F(x,x)",Complex,UNKNOWN,52,7.51
-96,F96,"((forall x. forall y. (F(x,y) -> F(y,x))) and (forall x. forall y. forall z. ((F(x,y) and F(y,z)) -> F(x,z)))) -> forall x. forall y. (F(x,y) -> F(x,x))",Complex,UNKNOWN,72,6.07
-97,F97,"((forall x. forall y. forall z. ((P(x,y) and P(y,z)) -> P(x,z))) and (forall x. forall y. (P(x,y) -> P(y,x)))) -> forall x. forall y. (P(x,y) -> P(y,y))",Complex,UNKNOWN,52,11.01
-98,F98,"(exists x. forall y. (F(x,y) -> G(x,y))) -> forall x. forall y. (F(x,y) -> G(x,y))",Complex,UNKNOWN,52,1.01
-99,F99,"(forall x. forall y. (F(x,y) -> not F(y,x))) -> forall x. not F(x,x)",Hard,VALID,9,0.13
-100,F100,"((exists x. F(x)) and (forall x. (F(x) -> exists y. (G(x,y) and F(y))))) -> exists x. exists y. (F(x) and G(x,y) and F(y))",Complex,UNKNOWN,52,1.53
-101,F101,"((forall x. exists y. F(x,y)) and (forall x. exists y. not F(x,y))) -> exists x. exists y. (F(x,y) and not F(x,y))",Complex,UNKNOWN,52,2.01
-102,F102,"((forall x. forall y. (R(x,y) -> not R(y,x))) and (forall x. forall y. forall z. ((R(x,y) and R(y,z)) -> R(x,z))) and (forall x. exists y. R(x,y))) -> not (exists x. forall y. R(y,x))",Complex,UNKNOWN,52,3.05
-103,F103,"((forall x. exists y. (F(x,y) and G(y))) and (forall x. forall y. (F(x,y) -> H(x)))) -> forall x. (H(x) and exists y. G(y))",Complex,UNKNOWN,52,1.44
-104,F104,"((forall x. forall y. (F(x,y) -> F(y,x))) and (forall x. exists y. F(x,y)) and (forall x. forall y. forall z. ((F(x,y) and F(y,z)) -> F(x,z)))) -> forall x. F(x,x)",Complex,UNKNOWN,52,42.73
-105,F105,"(forall x. exists y. (G(x,y) and not G(y,x))) -> not (exists x. G(x,x))",Hard,UNKNOWN,52,1.1
-106,F106,((forall x. (P(x) -> (Q(x) and R(x)))) and (forall x. ((Q(x) and R(x)) -> S(x))) and (forall x. (S(x) -> T(x)))) -> forall x. (P(x) -> T(x)),Complex,UNKNOWN,74,1.98
-107,F107,"(exists x. exists y. (F(x,y) and not F(y,x))) -> not (forall x. forall y. (F(x,y) -> F(y,x)))",Complex,UNKNOWN,52,1.95
-108,F108,"((forall x. forall y. forall z. ((F(x,y) and F(y,z)) -> F(x,z))) and (forall x. F(x,x))) -> forall x. forall y. F(x,y)",Complex,UNKNOWN,52,8.27
-109,F109,"((forall x. exists y. R(x,y)) and (forall x. forall y. (R(x,y) -> forall z. R(y,z)))) -> forall x. forall y. R(x,y)",Complex,UNKNOWN,52,1.99
-110,F110,"((forall x. forall y. (A(x,y) -> B(x,y))) and (forall x. forall y. (B(x,y) -> C(x,y))) and (exists x. exists y. A(x,y))) -> exists x. exists y. C(x,y)",Complex,UNKNOWN,52,4.57
-111,F111,"((forall x. forall y. (P(x,y) -> Q(x,y))) and (forall x. forall y. (Q(x,y) -> R(y,x))) and (exists x. exists y. P(x,y))) -> exists x. exists y. R(x,y)",Complex,UNKNOWN,52,4.64
-112,F112,"((forall x. forall y. forall z. ((R(x,y) and R(y,z)) -> R(x,z))) and (forall x. forall y. (R(x,y) -> R(y,x)))) -> exists x. R(x,x)",Complex,UNKNOWN,52,4.14
-113,F113,"((forall x. exists y. (P(x,y) and Q(y))) and (forall x. (Q(x) -> R(x)))) -> forall x. exists y. (P(x,y) and R(y))",Complex,UNKNOWN,52,1.45
-114,F114,"((forall x. (F(x) -> exists y. (G(x,y) and H(y)))) and (forall x. forall y. (G(x,y) -> I(x,y)))) -> forall x. (F(x) -> exists y. (I(x,y) and H(y)))",Complex,UNKNOWN,52,1.08
-115,F115,"((forall x. forall y. forall z. ((R(x,y) and R(y,z)) -> R(x,z))) and (forall x. R(x,x))) -> forall x. forall y. (R(x,y) or R(y,x))",Complex,UNKNOWN,52,8.16
-116,F116,"((forall x. exists y. F(x,y)) and (forall x. exists y. G(x,y)) and (forall x. forall y. ((F(x,y) or G(x,y)) -> forall z. ((F(y,z) or G(y,z)) -> H(x,z))))) -> forall x. exists y. H(x,y)",Complex,UNKNOWN,52,35.33
-117,F117,"((forall x. forall y. forall z. ((R(x,y) and R(z,y)) -> R(x,z))) and (exists x. exists y. R(x,y))) -> exists x. R(x,x)",Complex,UNKNOWN,52,7.21
-118,F118,"((forall x. (F(x) -> exists y. (G(x,y) and H(y)))) and (forall x. forall y. ((H(x) and G(y,x)) -> J(y)))) -> forall x. (F(x) -> J(x))",Complex,UNKNOWN,52,1.01
-119,F119,"((forall x. exists y. R(x,y)) and (forall x. forall y. (R(x,y) -> R(y,y)))) -> forall x. forall y. R(x,y)",Complex,UNKNOWN,52,2.51
-120,F120,((forall x. (A(x) -> (B(x) or C(x)))) and (forall x. (B(x) -> D(x))) and (forall x. (C(x) -> E(x))) and (forall x. ((D(x) or E(x)) -> F(x)))) -> forall x. (A(x) -> F(x)),Complex,UNKNOWN,67,2.06
-121,F121,"((forall x. forall y. (H(x,y) -> not H(y,x))) and (forall x. forall y. forall z. ((H(x,y) and H(y,z)) -> H(x,z))) and (forall x. exists y. H(x,y))) -> not (exists x. H(x,x))",Complex,UNKNOWN,52,2.75
+91,F91,((exists x. F(x)) and (exists x. G(x)) and (forall x. (F(x) -> H(x))) and (forall x. (G(x) -> J(x)))) -> exists x. exists y. (F(x) and G(y) and H(x) and J(y)),Hard,UNKNOWN,52,1.4
+92,F92,"not (exists y. forall x. ((F(x,y) -> not F(x,x)) and (not F(x,x) -> F(x,y))))",Complex,VALID,14,0.07
+93,F93,"((forall x. forall y. forall z. ((R(x,y) and R(y,z)) -> R(x,z))) and (forall x. forall y. (R(x,y) or R(y,x)))) -> forall x. forall y. forall z. ((R(x,y) and not R(x,z)) -> R(z,y))",Complex,UNKNOWN,52,22.86
+94,F94,"(forall x. forall y. forall z. ((R(x,y) and R(z,y)) -> R(x,z))) -> forall x. forall y. (R(x,y) -> R(y,x))",Complex,UNKNOWN,52,7.18
+95,F95,"((forall x. forall y. forall z. ((F(x,y) and F(z,y)) -> F(x,z))) and (exists x. exists y. F(x,y))) -> exists x. F(x,x)",Complex,UNKNOWN,52,7.81
+96,F96,"((forall x. forall y. (F(x,y) -> F(y,x))) and (forall x. forall y. forall z. ((F(x,y) and F(y,z)) -> F(x,z)))) -> forall x. forall y. (F(x,y) -> F(x,x))",Complex,UNKNOWN,72,5.54
+97,F97,"((forall x. forall y. forall z. ((P(x,y) and P(y,z)) -> P(x,z))) and (forall x. forall y. (P(x,y) -> P(y,x)))) -> forall x. forall y. (P(x,y) -> P(y,y))",Complex,UNKNOWN,52,10.66
+98,F98,"(exists x. forall y. (F(x,y) -> G(x,y))) -> forall x. forall y. (F(x,y) -> G(x,y))",Complex,UNKNOWN,52,0.8
+99,F99,"(forall x. forall y. (F(x,y) -> not F(y,x))) -> forall x. not F(x,x)",Complex,VALID,9,0.07
+100,F100,"((exists x. F(x)) and (forall x. (F(x) -> exists y. (G(x,y) and F(y))))) -> exists x. exists y. (F(x) and G(x,y) and F(y))",Complex,UNKNOWN,52,0.81
+101,F101,"((forall x. exists y. F(x,y)) and (forall x. exists y. not F(x,y))) -> exists x. exists y. (F(x,y) and not F(x,y))",Complex,UNKNOWN,52,1.82
+102,F102,"((forall x. forall y. (R(x,y) -> not R(y,x))) and (forall x. forall y. forall z. ((R(x,y) and R(y,z)) -> R(x,z))) and (forall x. exists y. R(x,y))) -> not (exists x. forall y. R(y,x))",Complex,UNKNOWN,52,3.24
+103,F103,"((forall x. exists y. (F(x,y) and G(y))) and (forall x. forall y. (F(x,y) -> H(x)))) -> forall x. (H(x) and exists y. G(y))",Complex,UNKNOWN,52,1.51
+104,F104,"((forall x. forall y. (F(x,y) -> F(y,x))) and (forall x. exists y. F(x,y)) and (forall x. forall y. forall z. ((F(x,y) and F(y,z)) -> F(x,z)))) -> forall x. F(x,x)",Complex,UNKNOWN,52,42.32
+105,F105,"(forall x. exists y. (G(x,y) and not G(y,x))) -> not (exists x. G(x,x))",Complex,UNKNOWN,52,1.19
+106,F106,((forall x. (P(x) -> (Q(x) and R(x)))) and (forall x. ((Q(x) and R(x)) -> S(x))) and (forall x. (S(x) -> T(x)))) -> forall x. (P(x) -> T(x)),Complex,UNKNOWN,74,1.93
+107,F107,"(exists x. exists y. (F(x,y) and not F(y,x))) -> not (forall x. forall y. (F(x,y) -> F(y,x)))",Complex,UNKNOWN,52,2.12
+108,F108,"((forall x. forall y. forall z. ((F(x,y) and F(y,z)) -> F(x,z))) and (forall x. F(x,x))) -> forall x. forall y. F(x,y)",Complex,UNKNOWN,52,8.32
+109,F109,"((forall x. exists y. R(x,y)) and (forall x. forall y. (R(x,y) -> forall z. R(y,z)))) -> forall x. forall y. R(x,y)",Complex,UNKNOWN,52,1.91
+110,F110,"((forall x. forall y. (A(x,y) -> B(x,y))) and (forall x. forall y. (B(x,y) -> C(x,y))) and (exists x. exists y. A(x,y))) -> exists x. exists y. C(x,y)",Complex,UNKNOWN,52,4.85
+111,F111,"((forall x. forall y. (P(x,y) -> Q(x,y))) and (forall x. forall y. (Q(x,y) -> R(y,x))) and (exists x. exists y. P(x,y))) -> exists x. exists y. R(x,y)",Complex,UNKNOWN,52,4.88
+112,F112,"((forall x. forall y. forall z. ((R(x,y) and R(y,z)) -> R(x,z))) and (forall x. forall y. (R(x,y) -> R(y,x)))) -> exists x. R(x,x)",Complex,UNKNOWN,52,4.25
+113,F113,"((forall x. exists y. (P(x,y) and Q(y))) and (forall x. (Q(x) -> R(x)))) -> forall x. exists y. (P(x,y) and R(y))",Complex,UNKNOWN,52,1.46
+114,F114,"((forall x. (F(x) -> exists y. (G(x,y) and H(y)))) and (forall x. forall y. (G(x,y) -> I(x,y)))) -> forall x. (F(x) -> exists y. (I(x,y) and H(y)))",Complex,UNKNOWN,52,1.15
+115,F115,"((forall x. forall y. forall z. ((R(x,y) and R(y,z)) -> R(x,z))) and (forall x. R(x,x))) -> forall x. forall y. (R(x,y) or R(y,x))",Complex,UNKNOWN,52,8.35
+116,F116,"((forall x. exists y. F(x,y)) and (forall x. exists y. G(x,y)) and (forall x. forall y. ((F(x,y) or G(x,y)) -> forall z. ((F(y,z) or G(y,z)) -> H(x,z))))) -> forall x. exists y. H(x,y)",Complex,UNKNOWN,52,35.2
+117,F117,"((forall x. forall y. forall z. ((R(x,y) and R(z,y)) -> R(x,z))) and (exists x. exists y. R(x,y))) -> exists x. R(x,x)",Complex,UNKNOWN,52,7.16
+118,F118,"((forall x. (F(x) -> exists y. (G(x,y) and H(y)))) and (forall x. forall y. ((H(x) and G(y,x)) -> J(y)))) -> forall x. (F(x) -> J(x))",Complex,UNKNOWN,52,1.06
+119,F119,"((forall x. exists y. R(x,y)) and (forall x. forall y. (R(x,y) -> R(y,y)))) -> forall x. forall y. R(x,y)",Complex,UNKNOWN,52,1.76
+120,F120,((forall x. (A(x) -> (B(x) or C(x)))) and (forall x. (B(x) -> D(x))) and (forall x. (C(x) -> E(x))) and (forall x. ((D(x) or E(x)) -> F(x)))) -> forall x. (A(x) -> F(x)),Complex,UNKNOWN,67,2.08
+121,F121,"((forall x. forall y. (H(x,y) -> not H(y,x))) and (forall x. forall y. forall z. ((H(x,y) and H(y,z)) -> H(x,z))) and (forall x. exists y. H(x,y))) -> not (exists x. H(x,x))",Complex,UNKNOWN,52,2.21

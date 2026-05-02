@@ -1,6 +1,6 @@
 Formula,Category,Baseline nodes,Improved nodes,Nodes reduced,Node speedup,Improvement responsible,Formula text
-F92,Hard,14,11,3,1.27x,Improvement 4: DFS backtracking for quantifier choices,"not (exists y. forall x. ((F(x,y) -> not F(x,x)) and (not F(x,x) -> F(x,y))))"
-F2,Easy propositional,4,2,2,2.00x,Improvement 1: double-negation priority,P(a) -> not not P(a)
-F17,Easy propositional,4,2,2,2.00x,Improvement 1: double-negation priority,not not P(a) -> P(a)
-F25,Easy propositional,12,10,2,1.20x,Improvement 3: memoisation / repeated sequent avoidance,(P(a) or Q(a)) -> ((P(a) -> R(a)) -> ((Q(a) -> R(a)) -> R(a)))
-F49,Complex,8,7,1,1.14x,Improvement 4: DFS backtracking for quantifier choices,"(exists x. (forall y. R(x,y))) -> (forall y. (exists x. R(x,y)))"
+F92,Complex,14,11,3,1.27x,Improvement 4: DFS backtracking for quantifier choices,"not (exists y. forall x. ((F(x,y) -> not F(x,x)) and (not F(x,x) -> F(x,y))))"
+F2,Easy,4,2,2,2.00x,Improvement 1: double-negation priority,P(a) -> not not P(a)
+F17,Easy,4,2,2,2.00x,Improvement 1: double-negation priority,not not P(a) -> P(a)
+F25,Easy,12,10,2,1.20x,Improvement 3: memoisation / repeated sequent avoidance,(P(a) or Q(a)) -> ((P(a) -> R(a)) -> ((Q(a) -> R(a)) -> R(a)))
+F49,Medium,8,7,1,1.14x,Improvement 4: DFS backtracking for quantifier choices,"(exists x. (forall y. R(x,y))) -> (forall y. (exists x. R(x,y)))"
